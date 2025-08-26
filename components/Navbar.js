@@ -8,7 +8,7 @@ export default function Navbar() {
             <a href="/">الرئيسية</a>
           </li>
           <li>
-            <a href="/entities">الكيانات</a>
+            <a href="../entities">الكيانات</a>
           </li>
           <li>
             <a href="/about">عن الموقع</a>
