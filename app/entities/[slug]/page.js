@@ -2,6 +2,7 @@ import EntityHeader from '@/components/EntityHeader'
 import SentimentStats from '@/components/SentimentStats'
 import NewsSourcesList from '@/components/NewsSourcesList'
 import TopRelatedEntities from '@/components/TopRelatedEntities'
+import EntityFrequencyChart from '@/components/EntityFrequencyChart'
 
 export async function generateMetadata({ params }) {
   const { slug } = params
@@ -34,6 +35,9 @@ export default async function EntityPage({ params }) {
       <SentimentStats stats={entity.sentiment_statistics} />
       <NewsSourcesList sources={entity.news_count_per_source} />
       <TopRelatedEntities related={entity.top_related_entities} />
+
+      {/* Line Chart */}
+      <EntityFrequencyChart data={entity.entity_frequency} />
     </div>
   )
 }
