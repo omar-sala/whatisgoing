@@ -20,11 +20,7 @@ export default async function EntityPage({ params }) {
   )
 
   if (!res.ok) {
-    return (
-      <div className="text-red-600 font-semibold">
-        ❌ حدث خطأ أثناء جلب البيانات
-      </div>
-    )
+    throw new Error('فشل في جلب البيانات') // يروح لـ error.js
   }
 
   const entity = await res.json()
