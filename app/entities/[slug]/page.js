@@ -6,8 +6,47 @@ import EntityFrequencyChart from '@/components/EntityFrequencyChart'
 
 export async function generateMetadata({ params }) {
   const { slug } = params
+
+  // جلب بيانات الكيان عشان نبني الـ metadata منها
+  const res = await fetch(
+    `https://backend.whatisgoing.com/api/entities/${slug}`,
+    { cache: 'no-store' }
+  )
+
+  if (!res.ok) {
+    return {
+      title: `الكيان: ${slug}`,
+      description: 'تعذر تحميل بيانات الكيان',
+    }
+  }
+
+  const entity = await res.json()
+
   return {
-    title: `صفحة الكيان: ${slug}`,
+    title: `📌 ${entity.name} | WhatIsGoing`,
+    description: entity.description || `صفحة ${entity.name} على WhatIsGoing`,
+    openGraph: {
+      title: `📌 ${entity.name} | WhatIsGoing`,
+      description: entity.description || `صفحة ${entity.name} على WhatIsGoing`,
+      url: `https://whatisgoing.com/entities/${slug}`,
+      siteName: 'WhatIsGoing',
+      images: [
+        {
+          url: entity.image || 'https://whatisgoing.com/default-og.png',
+          width: 1200,
+          height: 630,
+          alt: entity.name,
+        },
+      ],
+      locale: 'ar_EG',
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `📌 ${entity.name} | WhatIsGoing`,
+      description: entity.description || `صفحة ${entity.name} على WhatIsGoing`,
+      images: [entity.image || 'https://whatisgoing.com/default-og.png'],
+    },
   }
 }
 
@@ -20,7 +59,7 @@ export default async function EntityPage({ params }) {
   )
 
   if (!res.ok) {
-    throw new Error('فشل في جلب البيانات') // يروح لـ error.js
+    throw new Error('فشل في جلب البيانات')
   }
 
   const entity = await res.json()
@@ -31,8 +70,6 @@ export default async function EntityPage({ params }) {
       <SentimentStats stats={entity.sentiment_statistics} />
       <NewsSourcesList sources={entity.news_count_per_source} />
       <TopRelatedEntities related={entity.top_related_entities} />
-
-      {/* Line Chart */}
       <EntityFrequencyChart data={entity.entity_frequency} />
     </div>
   )
