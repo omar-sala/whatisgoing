@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function Navbar() {
   return (
     <nav className="bg-blue-600 text-white p-4">
@@ -5,13 +7,13 @@ export default function Navbar() {
         <h1 className="font-bold text-xl">NewsInsight</h1>
         <ul className="flex gap-6">
           <li>
-            <a href="/">الرئيسية</a>
+            <Link href={'/'}>الرئيسية</Link>
           </li>
           <li>
-            <a href="../entities">الكيانات</a>
+            <Link href={'../entities'}>الكيانات</Link>
           </li>
           <li>
-            <a href="/about">عن الموقع</a>
+            <Link href={'/about'}>عن الموقع</Link>
           </li>
         </ul>
       </div>
