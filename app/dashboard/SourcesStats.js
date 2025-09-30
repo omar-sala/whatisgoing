@@ -16,9 +16,7 @@ export default function SourcesStats() {
         if (!res.ok) throw new Error('فشل تحميل المصادر')
 
         const data = await res.json()
-        console.log('API /home:', data)
 
-        // تحويل الـ object لقائمة + ترتيب تنازلي
         const list = Object.entries(data.news_count_per_source || {}).map(
           ([name, count]) => ({ name, count })
         )
@@ -26,7 +24,6 @@ export default function SourcesStats() {
 
         setSources(list)
       } catch (err) {
-        console.error(err)
         setError(err?.message || 'حدث خطأ غير متوقع')
       } finally {
         setLoading(false)
@@ -40,11 +37,14 @@ export default function SourcesStats() {
   if (error) return <p className="text-red-500">❌ {error}</p>
 
   return (
-    <div className="p-4 bg-blue-500 shadow rounded-2xl">
+    <div className="p-4 bg-blue-500 shadow rounded-2xl w-full">
       <h2 className="text-xl font-bold mb-4">📊 أكثر المصادر كتابةً للأخبار</h2>
       <ul className="space-y-2">
         {sources.map((src, idx) => (
-          <li key={src.name || idx} className="flex justify-between">
+          <li
+            key={src.name || idx}
+            className="flex justify-between bg-blue-400 p-2 rounded-md"
+          >
             <span>{src.name}</span>
             <span className="font-semibold">
               {Number(src.count).toLocaleString('ar-EG')} خبر
