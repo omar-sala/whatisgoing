@@ -21,20 +21,3 @@ export default function NewsSourcesList({ sources }) {
     </div>
   )
 }
-
-// export default function NewsSourcesList({ sources }) {
-//   if (!sources) return null
-
-//   return (
-//     <div className="bg-gray-50 p-4 rounded-lg shadow mb-6">
-//       <h2 className="text-xl font-semibold mb-3">عدد الأخبار لكل مصدر</h2>
-//       <ul className="list-disc list-inside text-gray-700 space-y-1">
-//         {Object.entries(sources).map(([source, count]) => (
-//           <li key={source}>
-//             <span className="font-medium">{source}:</span> {count}
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   )
-// }

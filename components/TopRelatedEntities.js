@@ -1,3 +1,11 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faCalendarAlt,
+  faUser,
+  faBuilding,
+  faMapMarkerAlt,
+} from '@fortawesome/free-solid-svg-icons'
+
 export default function TopRelatedEntities({ related }) {
   return (
     <div>
@@ -5,11 +13,13 @@ export default function TopRelatedEntities({ related }) {
         🔗 الكيانات المرتبطة
       </h2>
 
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-4 gap-6">
         {/* أحداث */}
         {related?.event?.length > 0 && (
-          <div className="bg-white rounded-xl p-4 shadow">
-            <h3 className="font-bold text-lg mb-2 text-blue-700">📅 أحداث</h3>
+          <div className="bg-blue-50 border-l-4 border-blue-500 rounded-xl p-4 shadow">
+            <h3 className="font-bold text-lg mb-3 text-blue-700 flex items-center gap-2">
+              <FontAwesomeIcon icon={faCalendarAlt} /> أحداث
+            </h3>
             <ul className="list-disc list-inside space-y-1 text-gray-700">
               {related.event.map((ev) => (
                 <li key={ev.id}>
@@ -25,8 +35,10 @@ export default function TopRelatedEntities({ related }) {
 
         {/* أشخاص */}
         {related?.person?.length > 0 && (
-          <div className="bg-white rounded-xl p-4 shadow">
-            <h3 className="font-bold text-lg mb-2 text-green-700">👤 أشخاص</h3>
+          <div className="bg-green-50 border-l-4 border-green-500 rounded-xl p-4 shadow">
+            <h3 className="font-bold text-lg mb-3 text-green-700 flex items-center gap-2">
+              <FontAwesomeIcon icon={faUser} /> أشخاص
+            </h3>
             <ul className="list-disc list-inside space-y-1 text-gray-700">
               {related.person.map((p) => (
                 <li key={p.id}>
@@ -42,9 +54,9 @@ export default function TopRelatedEntities({ related }) {
 
         {/* منظمات */}
         {related?.organization?.length > 0 && (
-          <div className="bg-white rounded-xl p-4 shadow">
-            <h3 className="font-bold text-lg mb-2 text-purple-700">
-              🏢 منظمات
+          <div className="bg-purple-50 border-l-4 border-purple-500 rounded-xl p-4 shadow">
+            <h3 className="font-bold text-lg mb-3 text-purple-700 flex items-center gap-2">
+              <FontAwesomeIcon icon={faBuilding} /> منظمات
             </h3>
             <ul className="list-disc list-inside space-y-1 text-gray-700">
               {related.organization.map((o) => (
@@ -58,24 +70,26 @@ export default function TopRelatedEntities({ related }) {
             </ul>
           </div>
         )}
+
+        {/* أماكن */}
+        {related?.location?.length > 0 && (
+          <div className="bg-red-50 border-l-4 border-red-500 rounded-xl p-4 shadow">
+            <h3 className="font-bold text-lg mb-3 text-red-700 flex items-center gap-2">
+              <FontAwesomeIcon icon={faMapMarkerAlt} /> أماكن
+            </h3>
+            <ul className="list-disc list-inside space-y-1 text-gray-700">
+              {related.location.map((loc) => (
+                <li key={loc.id}>
+                  {loc.name}{' '}
+                  {loc.value !== undefined && (
+                    <span className="text-sm text-gray-500">({loc.value})</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   )
 }
-
-// export default function TopRelatedEntities({ entities }) {
-//   if (!entities || entities.length === 0) return null
-
-//   return (
-//     <div className="bg-gray-50 p-4 rounded-lg shadow">
-//       <h2 className="text-xl font-semibold mb-3">الكيانات المرتبطة</h2>
-//       <ul className="list-disc list-inside text-gray-700 space-y-1">
-//         {entities.map((e, i) => (
-//           <li key={i}>
-//             {e.name} <span className="text-sm text-gray-500">({e.value})</span>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   )
-// }

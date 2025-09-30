@@ -67,14 +67,14 @@ export default function TopEntitiesPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Top Entities</h1>
+      <h1 className="text-2xl text-blue-600 font-bold mb-4">Top Entities</h1>
       <ul className="space-y-2">
         {entities.map((entity, idx) => (
           <li
             key={entity.id ?? entity.name ?? idx}
             className="p-3 border rounded-lg shadow"
           >
-            <h2 className="font-semibold">{entity.name}</h2>
+            <h2 className="font-semibold text-gray-600">{entity.name}</h2>
             <p className="text-sm text-gray-600">
               النوع: {entity.entity_type ?? 'غير معروف'} | الأخبار:{' '}
               {entity.news_count ?? 0}

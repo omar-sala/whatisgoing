@@ -16,7 +16,9 @@ export default function EntityFrequencyChart({ data }) {
 
   return (
     <div className="w-full h-80 bg-white shadow rounded-2xl p-4">
-      <h2 className="text-xl font-bold mb-4">تغير تكرار الكيان بمرور الوقت</h2>
+      <h2 className="text-xl text-blue-600 font-bold mb-4">
+        تغير تكرار الكيان بمرور الوقت
+      </h2>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
